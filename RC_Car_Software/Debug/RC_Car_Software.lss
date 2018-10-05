@@ -1,0 +1,468 @@
+
+RC_Car_Software.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000023a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000012  00800060  0000023a  000002ce  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800072  00800072  000002e0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002e0  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000118  00000000  00000000  00000310  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000075d  00000000  00000000  00000428  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000045d  00000000  00000000  00000b85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000540  00000000  00000000  00000fe2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000026c  00000000  00000000  00001524  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000291  00000000  00000000  00001790  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000403  00000000  00000000  00001a21  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000c8  00000000  00000000  00001e24  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	ae c0       	rjmp	.+348    	; 0x160 <__vector_1>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	d0 c0       	rjmp	.+416    	; 0x1b4 <__vector_9>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	61 c0       	rjmp	.+194    	; 0xe0 <__vector_14>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	ea e3       	ldi	r30, 0x3A	; 58
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a2 37       	cpi	r26, 0x72	; 114
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	20 e0       	ldi	r18, 0x00	; 0
+  4a:	a2 e7       	ldi	r26, 0x72	; 114
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a6 37       	cpi	r26, 0x76	; 118
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	eb d0       	rcall	.+470    	; 0x230 <main>
+  5a:	ed c0       	rjmp	.+474    	; 0x236 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <ReadADC>:
+	// enable adc, start conversion, enable interrupt, set prescaler to 64
+	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADIE) | (1 << ADPS2) | (1 << ADPS1);
+}
+
+uint8_t ReadADC(){
+	return ADCH;
+  5e:	85 b1       	in	r24, 0x05	; 5
+}
+  60:	08 95       	ret
+
+00000062 <blink_LED>:
+#include <util/delay.h>
+
+void blink_LED() {
+	// blinking LED //
+	
+	PORTB = ~(1 << myLED) & PORTB; // on led
+  62:	c0 98       	cbi	0x18, 0	; 24
+	PORTB = (1 << myLED) | PORTB; //off led
+  64:	c0 9a       	sbi	0x18, 0	; 24
+  66:	08 95       	ret
+
+00000068 <EEPROM_write>:
+#include "../Headers/DEFINES.h"
+#include "../Headers/EEPROM.h"
+#include <avr/io.h>
+
+void EEPROM_write(UI address, UC data) {
+	while(EECR & (1 << EEWE)) // busy wait for prev write
+  68:	e1 99       	sbic	0x1c, 1	; 28
+  6a:	fe cf       	rjmp	.-4      	; 0x68 <EEPROM_write>
+	;
+	EEAR = address; // set up address register
+  6c:	9f bb       	out	0x1f, r25	; 31
+  6e:	8e bb       	out	0x1e, r24	; 30
+	EEDR = data; // set up data register
+  70:	6d bb       	out	0x1d, r22	; 29
+	EECR |= (1 << EEMWE); // write 1 to EEMWE
+  72:	e2 9a       	sbi	0x1c, 2	; 28
+	EECR |= (1 << EEWE); // start eeprom write by setting EEWE
+  74:	e1 9a       	sbi	0x1c, 1	; 28
+  76:	08 95       	ret
+
+00000078 <hex2ascii>:
+#include "../Headers/USART.h"
+#include <avr/io.h>
+
+void hex2ascii(unsigned char hexval, unsigned char *c1, unsigned char *c2) {
+
+	(*c1) = asctab[(hexval>>4)&0x0F];
+  78:	a8 2f       	mov	r26, r24
+  7a:	a2 95       	swap	r26
+  7c:	af 70       	andi	r26, 0x0F	; 15
+  7e:	b0 e0       	ldi	r27, 0x00	; 0
+  80:	a0 5a       	subi	r26, 0xA0	; 160
+  82:	bf 4f       	sbci	r27, 0xFF	; 255
+  84:	9c 91       	ld	r25, X
+  86:	fb 01       	movw	r30, r22
+  88:	90 83       	st	Z, r25
+	(*c2) = asctab[(hexval)&0x0F];
+  8a:	8f 70       	andi	r24, 0x0F	; 15
+  8c:	e8 2f       	mov	r30, r24
+  8e:	f0 e0       	ldi	r31, 0x00	; 0
+  90:	e0 5a       	subi	r30, 0xA0	; 160
+  92:	ff 4f       	sbci	r31, 0xFF	; 255
+  94:	80 81       	ld	r24, Z
+  96:	fa 01       	movw	r30, r20
+  98:	80 83       	st	Z, r24
+  9a:	08 95       	ret
+
+0000009c <PutC>:
+	}
+	return temp;
+}
+
+void PutC(UC data) {
+	while (!(UCSRA & (1 << UDRE))) // busy wait for empty transmit buffer
+  9c:	5d 9b       	sbis	0x0b, 5	; 11
+  9e:	fe cf       	rjmp	.-4      	; 0x9c <PutC>
+	;
+	UDR = data; // put data into buffer and send it
+  a0:	8c b9       	out	0x0c, r24	; 12
+  a2:	08 95       	ret
+
+000000a4 <USART_Init>:
+	}
+}
+
+void USART_Init(UI baud) {
+	// set baud rate
+	UBRRH = (UC)((baud & 0xFF00) >> 8);
+  a4:	90 bd       	out	0x20, r25	; 32
+	UBRRL = (UC)((baud & 0x00FF));
+  a6:	89 b9       	out	0x09, r24	; 9
+	
+	//enable receiver and transmitter
+	UCSRB = (1 << RXEN) | (1 << TXEN);
+  a8:	88 e1       	ldi	r24, 0x18	; 24
+  aa:	8a b9       	out	0x0a, r24	; 10
+	
+	// set format to 8 bits 2 stop bits
+	UCSRC = (1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
+  ac:	8e e8       	ldi	r24, 0x8E	; 142
+  ae:	80 bd       	out	0x20, r24	; 32
+  b0:	08 95       	ret
+
+000000b2 <HEX_USART>:
+}
+
+void HEX_USART(UC data) {
+  b2:	cf 93       	push	r28
+  b4:	df 93       	push	r29
+  b6:	00 d0       	rcall	.+0      	; 0xb8 <HEX_USART+0x6>
+  b8:	cd b7       	in	r28, 0x3d	; 61
+  ba:	de b7       	in	r29, 0x3e	; 62
+	char c1, c2;
+	
+	hex2ascii(data, &c1, &c2);
+  bc:	ae 01       	movw	r20, r28
+  be:	4e 5f       	subi	r20, 0xFE	; 254
+  c0:	5f 4f       	sbci	r21, 0xFF	; 255
+  c2:	be 01       	movw	r22, r28
+  c4:	6f 5f       	subi	r22, 0xFF	; 255
+  c6:	7f 4f       	sbci	r23, 0xFF	; 255
+  c8:	d7 df       	rcall	.-82     	; 0x78 <hex2ascii>
+	PutC(c1);
+  ca:	89 81       	ldd	r24, Y+1	; 0x01
+  cc:	e7 df       	rcall	.-50     	; 0x9c <PutC>
+	PutC(c2);
+  ce:	8a 81       	ldd	r24, Y+2	; 0x02
+  d0:	e5 df       	rcall	.-54     	; 0x9c <PutC>
+	PutC(',');
+  d2:	8c e2       	ldi	r24, 0x2C	; 44
+  d4:	e3 df       	rcall	.-58     	; 0x9c <PutC>
+
+}
+  d6:	0f 90       	pop	r0
+  d8:	0f 90       	pop	r0
+  da:	df 91       	pop	r29
+  dc:	cf 91       	pop	r28
+  de:	08 95       	ret
+
+000000e0 <__vector_14>:
+#include "Headers/USART.h"
+
+int BYTE_COUNT = 0; // address to be written to EEPROM, also the count of bytes already written
+int OVERFLOW_COUNT = 0; // counter for the number of overflows
+
+ISR(ADC_vect) {
+  e0:	1f 92       	push	r1
+  e2:	0f 92       	push	r0
+  e4:	0f b6       	in	r0, 0x3f	; 63
+  e6:	0f 92       	push	r0
+  e8:	11 24       	eor	r1, r1
+  ea:	2f 93       	push	r18
+  ec:	3f 93       	push	r19
+  ee:	4f 93       	push	r20
+  f0:	5f 93       	push	r21
+  f2:	6f 93       	push	r22
+  f4:	7f 93       	push	r23
+  f6:	8f 93       	push	r24
+  f8:	9f 93       	push	r25
+  fa:	af 93       	push	r26
+  fc:	bf 93       	push	r27
+  fe:	ef 93       	push	r30
+ 100:	ff 93       	push	r31
+	if (BYTE_COUNT < 512) { 
+ 102:	80 91 74 00 	lds	r24, 0x0074
+ 106:	90 91 75 00 	lds	r25, 0x0075
+ 10a:	81 15       	cp	r24, r1
+ 10c:	92 40       	sbci	r25, 0x02	; 2
+ 10e:	9c f4       	brge	.+38     	; 0x136 <__vector_14+0x56>
+		EEPROM_write(BYTE_COUNT, ReadADC()); // write too EEPROM the adc value, and store in location BYTE_COUNT
+ 110:	a6 df       	rcall	.-180    	; 0x5e <ReadADC>
+ 112:	68 2f       	mov	r22, r24
+ 114:	70 e0       	ldi	r23, 0x00	; 0
+ 116:	80 91 74 00 	lds	r24, 0x0074
+ 11a:	90 91 75 00 	lds	r25, 0x0075
+ 11e:	a4 df       	rcall	.-184    	; 0x68 <EEPROM_write>
+		BYTE_COUNT++; 
+ 120:	80 91 74 00 	lds	r24, 0x0074
+ 124:	90 91 75 00 	lds	r25, 0x0075
+ 128:	01 96       	adiw	r24, 0x01	; 1
+ 12a:	90 93 75 00 	sts	0x0075, r25
+ 12e:	80 93 74 00 	sts	0x0074, r24
+		ADCSRA |= (1 << ADSC); // start next conversion
+ 132:	36 9a       	sbi	0x06, 6	; 6
+ 134:	04 c0       	rjmp	.+8      	; 0x13e <__vector_14+0x5e>
+	}else {
+		// 512 samples are done, reset BYTE_COUNT to 0, DO NOT START NEXT CONVERSION, this will disable this interrupt
+		BYTE_COUNT = 0;
+ 136:	10 92 75 00 	sts	0x0075, r1
+ 13a:	10 92 74 00 	sts	0x0074, r1
+	}
+}
+ 13e:	ff 91       	pop	r31
+ 140:	ef 91       	pop	r30
+ 142:	bf 91       	pop	r27
+ 144:	af 91       	pop	r26
+ 146:	9f 91       	pop	r25
+ 148:	8f 91       	pop	r24
+ 14a:	7f 91       	pop	r23
+ 14c:	6f 91       	pop	r22
+ 14e:	5f 91       	pop	r21
+ 150:	4f 91       	pop	r20
+ 152:	3f 91       	pop	r19
+ 154:	2f 91       	pop	r18
+ 156:	0f 90       	pop	r0
+ 158:	0f be       	out	0x3f, r0	; 63
+ 15a:	0f 90       	pop	r0
+ 15c:	1f 90       	pop	r1
+ 15e:	18 95       	reti
+
+00000160 <__vector_1>:
+
+ISR(INT0_vect) {
+ 160:	1f 92       	push	r1
+ 162:	0f 92       	push	r0
+ 164:	0f b6       	in	r0, 0x3f	; 63
+ 166:	0f 92       	push	r0
+ 168:	11 24       	eor	r1, r1
+ 16a:	2f 93       	push	r18
+ 16c:	3f 93       	push	r19
+ 16e:	4f 93       	push	r20
+ 170:	5f 93       	push	r21
+ 172:	6f 93       	push	r22
+ 174:	7f 93       	push	r23
+ 176:	8f 93       	push	r24
+ 178:	9f 93       	push	r25
+ 17a:	af 93       	push	r26
+ 17c:	bf 93       	push	r27
+ 17e:	ef 93       	push	r30
+ 180:	ff 93       	push	r31
+	blink_LED();
+ 182:	6f df       	rcall	.-290    	; 0x62 <blink_LED>
+	HEX_USART(OVERFLOW_COUNT);
+ 184:	80 91 72 00 	lds	r24, 0x0072
+ 188:	94 df       	rcall	.-216    	; 0xb2 <HEX_USART>
+	OVERFLOW_COUNT = 0;
+ 18a:	10 92 73 00 	sts	0x0073, r1
+ 18e:	10 92 72 00 	sts	0x0072, r1
+}
+ 192:	ff 91       	pop	r31
+ 194:	ef 91       	pop	r30
+ 196:	bf 91       	pop	r27
+ 198:	af 91       	pop	r26
+ 19a:	9f 91       	pop	r25
+ 19c:	8f 91       	pop	r24
+ 19e:	7f 91       	pop	r23
+ 1a0:	6f 91       	pop	r22
+ 1a2:	5f 91       	pop	r21
+ 1a4:	4f 91       	pop	r20
+ 1a6:	3f 91       	pop	r19
+ 1a8:	2f 91       	pop	r18
+ 1aa:	0f 90       	pop	r0
+ 1ac:	0f be       	out	0x3f, r0	; 63
+ 1ae:	0f 90       	pop	r0
+ 1b0:	1f 90       	pop	r1
+ 1b2:	18 95       	reti
+
+000001b4 <__vector_9>:
+
+ISR(TIMER0_OVF_vect) {
+ 1b4:	1f 92       	push	r1
+ 1b6:	0f 92       	push	r0
+ 1b8:	0f b6       	in	r0, 0x3f	; 63
+ 1ba:	0f 92       	push	r0
+ 1bc:	11 24       	eor	r1, r1
+ 1be:	8f 93       	push	r24
+ 1c0:	9f 93       	push	r25
+	TCNT0 = 0x96;
+ 1c2:	86 e9       	ldi	r24, 0x96	; 150
+ 1c4:	82 bf       	out	0x32, r24	; 50
+	if (OVERFLOW_COUNT < 254) {
+ 1c6:	80 91 72 00 	lds	r24, 0x0072
+ 1ca:	90 91 73 00 	lds	r25, 0x0073
+ 1ce:	8e 3f       	cpi	r24, 0xFE	; 254
+ 1d0:	91 05       	cpc	r25, r1
+ 1d2:	34 f4       	brge	.+12     	; 0x1e0 <__vector_9+0x2c>
+		OVERFLOW_COUNT++;
+ 1d4:	01 96       	adiw	r24, 0x01	; 1
+ 1d6:	90 93 73 00 	sts	0x0073, r25
+ 1da:	80 93 72 00 	sts	0x0072, r24
+ 1de:	06 c0       	rjmp	.+12     	; 0x1ec <__vector_9+0x38>
+	} else {
+		OVERFLOW_COUNT = 0xFE;
+ 1e0:	8e ef       	ldi	r24, 0xFE	; 254
+ 1e2:	90 e0       	ldi	r25, 0x00	; 0
+ 1e4:	90 93 73 00 	sts	0x0073, r25
+ 1e8:	80 93 72 00 	sts	0x0072, r24
+	}
+	
+}
+ 1ec:	9f 91       	pop	r25
+ 1ee:	8f 91       	pop	r24
+ 1f0:	0f 90       	pop	r0
+ 1f2:	0f be       	out	0x3f, r0	; 63
+ 1f4:	0f 90       	pop	r0
+ 1f6:	1f 90       	pop	r1
+ 1f8:	18 95       	reti
+
+000001fa <TIMER0_Init>:
+	INT0_Init();
+	
+}
+
+void TIMER0_Init() {
+	TCCR0 |= (1 << CS02); // prescale at 256
+ 1fa:	83 b7       	in	r24, 0x33	; 51
+ 1fc:	84 60       	ori	r24, 0x04	; 4
+ 1fe:	83 bf       	out	0x33, r24	; 51
+	TCNT0 = 0x96; // timer start value at 150
+ 200:	86 e9       	ldi	r24, 0x96	; 150
+ 202:	82 bf       	out	0x32, r24	; 50
+	TIMSK |= (1 << TOIE0); // enable timer interrupt
+ 204:	89 b7       	in	r24, 0x39	; 57
+ 206:	81 60       	ori	r24, 0x01	; 1
+ 208:	89 bf       	out	0x39, r24	; 57
+ 20a:	08 95       	ret
+
+0000020c <INT0_Init>:
+}
+
+void INT0_Init() {
+	MCUCR |= (1 << ISC01) | (1 << ISC00); // configure int0 to interrupt on rising edge
+ 20c:	85 b7       	in	r24, 0x35	; 53
+ 20e:	83 60       	ori	r24, 0x03	; 3
+ 210:	85 bf       	out	0x35, r24	; 53
+	GICR |= (1 << INT0); // enable int0
+ 212:	8b b7       	in	r24, 0x3b	; 59
+ 214:	80 64       	ori	r24, 0x40	; 64
+ 216:	8b bf       	out	0x3b, r24	; 59
+	GIFR |= (1 << INTF0); // enable int0 interrupt
+ 218:	8a b7       	in	r24, 0x3a	; 58
+ 21a:	80 64       	ori	r24, 0x40	; 64
+ 21c:	8a bf       	out	0x3a, r24	; 58
+ 21e:	08 95       	ret
+
+00000220 <Peripherals_Init>:
+	}
+	
+}
+
+void Peripherals_Init(){
+	DDRB = (1 << myLED);
+ 220:	81 e0       	ldi	r24, 0x01	; 1
+ 222:	87 bb       	out	0x17, r24	; 23
+	USART_Init(myBaud);
+ 224:	83 e3       	ldi	r24, 0x33	; 51
+ 226:	90 e0       	ldi	r25, 0x00	; 0
+ 228:	3d df       	rcall	.-390    	; 0xa4 <USART_Init>
+	TIMER0_Init();
+ 22a:	e7 df       	rcall	.-50     	; 0x1fa <TIMER0_Init>
+	INT0_Init();
+ 22c:	ef df       	rcall	.-34     	; 0x20c <INT0_Init>
+ 22e:	08 95       	ret
+
+00000230 <main>:
+	//UC *ptrCR = (UC *)CR_8255;
+	//(*ptrCR) = CR_WORD_PA_Out_PB_IN;
+	//UI nsamples = 1000;
+	
+	
+	Peripherals_Init();
+ 230:	f7 df       	rcall	.-18     	; 0x220 <Peripherals_Init>
+	sei(); // enable global interrupts
+ 232:	78 94       	sei
+ 234:	ff cf       	rjmp	.-2      	; 0x234 <main+0x4>
+
+00000236 <_exit>:
+ 236:	f8 94       	cli
+
+00000238 <__stop_program>:
+ 238:	ff cf       	rjmp	.-2      	; 0x238 <__stop_program>
