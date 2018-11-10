@@ -1,6 +1,6 @@
+#include <avr/io.h>
 #include "../Headers/DEFINES.h"
 #include "../Headers/USART.h"
-#include <avr/io.h>
 
 void hex2ascii(unsigned char hexval, unsigned char *c1, unsigned char *c2) {
 	(*c1) = asctab[(hexval>>4)&0x0F];
@@ -9,12 +9,10 @@ void hex2ascii(unsigned char hexval, unsigned char *c1, unsigned char *c2) {
 
 UC ascii2hex(UC ch) {
 	UC temp;
-	if (ch < 'A')
-	{
+	if (ch < 'A') {
 		temp = ch - '0';
 	}
-	else
-	{
+	else {
 		temp = ch - '7';
 	}
 	return temp;
@@ -33,7 +31,7 @@ UC GetC(void) {
 }
 
 UC EchoC(void) {
-	UC ch = GetC();
+	UC ch = GetC(); 
 	PutC(ch);
 	return ch;
 }
@@ -62,10 +60,7 @@ void USART_Init(UI baud) {
 
 void HEX_USART(UC data) {
 	char c1, c2;
-	
 	hex2ascii(data, &c1, &c2);
 	PutC(c1);
 	PutC(c2);
-	PutC(',');
-
 }

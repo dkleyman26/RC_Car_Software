@@ -3,32 +3,31 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
-#define TIMER_START 0x96
-#define OVERFLOW_CLAMP 0xFE
+#define F_CPU					8000000UL
+#define TIMER0_START			0x96	// 150
+#define TIMER1_START			0xE0	// 224
+#define OVERFLOW_CLAMP			0xFE	// 254
+#define LEFT_SWITCH				PIND6	// EE PID enable pin
+#define RIGHT_SWITCH			PIND7	// CPE PID enable pin
+#define CPE_SWITCH_ENABLED		PIND & (1 << RIGHT_SWITCH)
+#define EE_SWITCH_ENABLED		PIND & (1 << LEFT_SWITCH)
+#define CPE_SWITCH_DISABLED		!(PIND & (1 << RIGHT_SWITCH))
+#define EE_SWITCH_DISABLED		!(PIND & (1 << LEFT_SWITCH))
 
 /* type definitions */
-typedef unsigned char UC;
-typedef unsigned int UI;
+typedef unsigned char	UC;
+typedef unsigned int	UI;
+typedef uint8_t			ui8;
+typedef uint16_t		ui16;
+typedef uint32_t		ui32;
 
-#define PA_8255 0x6000
-#define PB_8255 0x6001
-#define PC_8255 0x6002
-#define CR_8255 0x6003
-#define CR_WORD_PA_Out_PB_IN 0x82
+enum Mode {IDLE = 1, EE_PID = 2, CPE_PID = 3};
 
-#define CLK PB2
-#define SOC PB3
-#define OE PB1
-#define CS PB4
-#define MOSI PB5
-#define MISO PB6
-#define SCK PB7
-
-#define READ 0x03
-#define WRITE 0x02
-#define WRDI 0x04
-#define WREN 0x06
-#define RDSR 0x05
-#define WRSR 0x01
+/*
+char	-> ui8
+UC		-> ui8
+int		-> ui16
+UI		-> ui16
+*/
 
 #endif /* DEFINES_H_ */

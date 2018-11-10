@@ -1,6 +1,6 @@
 #include <avr/io.h>
-#include "../Headers/ADC_INITIALIZATION.h"
 #include "../Headers/DEFINES.h"
+#include "../Headers/ADC.h"
 
 void ADC_Init() {
 	ADMUX |= (1 << ADLAR); // left adjust adc result to get 8 bit precision from 10 bit output

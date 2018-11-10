@@ -3,9 +3,9 @@
 
 static const char asctab[] = "0123456789ABCDEF";
 
-#define FOSC 8000000
-#define BAUD 9600
-#define myBaud FOSC / 16 / BAUD - 1
+#define F_CPU	8000000UL
+#define BAUD	9600
+#define myBaud	F_CPU / 16 / BAUD - 1
 
 void hex2ascii(unsigned char hexval, unsigned char *c1, unsigned char *c2);
 UC ascii2hex(UC ch);

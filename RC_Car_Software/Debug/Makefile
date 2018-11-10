@@ -39,9 +39,12 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../Files/ADC_INITIALIZATION.c \
+../Files/ADC.c \
 ../Files/BLINKY.c \
 ../Files/EEPROM.c \
+../Files/EE_INTEGRATION.c \
+../Files/PID_CONTROLLER.c \
+../Files/TWI.c \
 ../Files/USART.c \
 ../RC_Car_Software.c
 
@@ -53,30 +56,42 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-Files/ADC_INITIALIZATION.o \
+Files/ADC.o \
 Files/BLINKY.o \
 Files/EEPROM.o \
+Files/EE_INTEGRATION.o \
+Files/PID_CONTROLLER.o \
+Files/TWI.o \
 Files/USART.o \
 RC_Car_Software.o
 
 OBJS_AS_ARGS +=  \
-Files/ADC_INITIALIZATION.o \
+Files/ADC.o \
 Files/BLINKY.o \
 Files/EEPROM.o \
+Files/EE_INTEGRATION.o \
+Files/PID_CONTROLLER.o \
+Files/TWI.o \
 Files/USART.o \
 RC_Car_Software.o
 
 C_DEPS +=  \
-Files/ADC_INITIALIZATION.d \
+Files/ADC.d \
 Files/BLINKY.d \
 Files/EEPROM.d \
+Files/EE_INTEGRATION.d \
+Files/PID_CONTROLLER.d \
+Files/TWI.d \
 Files/USART.d \
 RC_Car_Software.d
 
 C_DEPS_AS_ARGS +=  \
-Files/ADC_INITIALIZATION.d \
+Files/ADC.d \
 Files/BLINKY.d \
 Files/EEPROM.d \
+Files/EE_INTEGRATION.d \
+Files/PID_CONTROLLER.d \
+Files/TWI.d \
 Files/USART.d \
 RC_Car_Software.d
 
@@ -94,6 +109,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 
